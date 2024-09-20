@@ -5,14 +5,21 @@ import {
   TextInput,
   Alert,
   ScrollView,
+  type TextInputProps,
 } from "react-native";
 import { theme } from "@/theme";
 import { useState } from "react";
-import { PlantlyImage } from "@/components/PlantltImage";
+import { PlantlyImage } from "@/components/PlantlyImage";
 import { PlantlyButton } from "@/components/PlantlyButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { usePlantStore } from "@/store/plantsStore";
+import Input from "@/components/PlantlyInput";
+import { useRouter } from "expo-router";
 
 export default function NewScreen() {
+  const addPlant = usePlantStore((state) => state.addPlant);
+  const router = useRouter();
+
   const [name, setName] = useState<string>("");
   const [days, setDays] = useState<string>("");
 
@@ -35,7 +42,8 @@ export default function NewScreen() {
       );
     }
 
-    console.log("Adding plant", name, days);
+    addPlant(name, Number(days));
+    router.navigate("/");
   };
 
   return (
@@ -56,38 +64,22 @@ export default function NewScreen() {
       <Input
         label="Water frequency (every x days)"
         placeholder="E.g. 1"
-        value={days}
+        value={days.toString()}
         onChangeText={setDays}
+        keyboardType="numeric"
       />
       <PlantlyButton title="Add plant" onPress={handleSubmit} />
     </KeyboardAwareScrollView>
   );
 }
 
-const Input = ({
-  label,
-  placeholder,
-  value,
-  onChangeText,
-}: {
+interface InputProps extends TextInputProps {
   label: string;
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
-}) => {
-  return (
-    <>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        style={styles.input}
-        placeholder={placeholder}
-        autoCapitalize="words"
-      />
-    </>
-  );
-};
+  keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -100,18 +92,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
 
-  label: {
-    fontSize: 18,
-    marginBottom: 8,
-  },
-  input: {
-    borderWidth: 2,
-    borderColor: theme.colorLightGrey,
-    padding: 12,
-    borderRadius: 6,
-    marginBottom: 24,
-    fontSize: 18,
-  },
   centered: {
     alignItems: "center",
   },
