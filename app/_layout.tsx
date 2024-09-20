@@ -10,6 +10,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="onboarding"
         options={{
+          headerShown: false,
           presentation: "modal",
           animation: "slide_from_bottom",
         }}
