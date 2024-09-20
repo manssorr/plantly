@@ -1,6 +1,6 @@
 import { Entypo, Feather } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { theme } from "../theme";
+import { theme } from "@/theme";
 import { Text } from "react-native";
 
 const tabBarLabel = ({
