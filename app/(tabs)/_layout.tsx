@@ -2,22 +2,16 @@ import { Entypo, Feather } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { theme } from "@/theme";
 import { Text } from "react-native";
+import { Redirect } from "expo-router";
 
-const tabBarLabel = ({
-  focused,
-  color,
-  children,
-}: {
-  focused: boolean;
-  color: string;
-  children: string;
-}) => {
-  return focused ? (
-    <Text style={{ color, fontSize: 12, fontWeight: "bold" }}>{children}</Text>
-  ) : null;
-};
+const hasFinishedOnboarding = false;
 
 export default function RootLayout() {
+  if (!hasFinishedOnboarding) {
+    return <Redirect href="/onboarding" />;
+  }
+
+  console.log("RootLayout");
   return (
     <Tabs
       screenOptions={{
@@ -47,3 +41,25 @@ export default function RootLayout() {
     </Tabs>
   );
 }
+
+const tabBarLabel = ({
+  focused,
+  color,
+  children,
+}: {
+  focused: boolean;
+  color: string;
+  children: string;
+}) => {
+  return focused ? (
+    <Text
+      style={{
+        color,
+        fontSize: 12,
+        fontWeight: "bold",
+      }}
+    >
+      {children}
+    </Text>
+  ) : null;
+};
