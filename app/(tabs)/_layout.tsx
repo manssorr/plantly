@@ -14,7 +14,6 @@ export default function RootLayout() {
     return <Redirect href="/onboarding" />;
   }
 
-  console.log(`hasFinishedOnboarding`, hasFinishedOnboarding);
   return (
     <Tabs
       screenOptions={{
