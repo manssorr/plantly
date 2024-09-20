@@ -6,6 +6,7 @@ import { PlantlyButton } from "@/components/PlantlyButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { PlantlyImage } from "@/components/PlantlyImage";
+import { PlantlyText } from "@/components/PlantlyText";
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -27,9 +28,9 @@ export default function OnboardingScreen() {
       <StatusBar style="light" />
       <View>
         <Text style={styles.heading}>Plantly</Text>
-        <Text style={styles.tagline}>
+        <PlantlyText variant="heading" style={styles.tagline}>
           Keep your plants healthy and hydrated
-        </Text>
+        </PlantlyText>
       </View>
       <PlantlyImage />
       <PlantlyButton title="Let me in" onPress={handleOnboarding} />
@@ -43,9 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: theme.colorWhite,
-  },
-  text: {
-    fontSize: 24,
+    padding: 24,
   },
   heading: {
     fontSize: 42,
@@ -55,7 +54,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   tagline: {
-    fontSize: 24,
     color: theme.colorWhite,
     textAlign: "center",
   },
