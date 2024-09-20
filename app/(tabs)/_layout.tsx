@@ -3,15 +3,18 @@ import { Tabs } from "expo-router";
 import { theme } from "@/theme";
 import { Text } from "react-native";
 import { Redirect } from "expo-router";
-
-const hasFinishedOnboarding = false;
+import { useUserStore } from "@/store/userStore";
 
 export default function RootLayout() {
+  const hasFinishedOnboarding = useUserStore(
+    (state) => state.hasFinishedOnboarding
+  );
+
   if (!hasFinishedOnboarding) {
     return <Redirect href="/onboarding" />;
   }
 
-  console.log("RootLayout");
+  console.log(`hasFinishedOnboarding`, hasFinishedOnboarding);
   return (
     <Tabs
       screenOptions={{
