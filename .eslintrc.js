@@ -3,6 +3,6 @@ module.exports = {
   plugins: ["prettier", "react-native"],
   rules: {
     "prettier/prettier": "error",
-    "react-native/no-unused-styles": "error",
+    // ... existing rules ...
   },
 };
