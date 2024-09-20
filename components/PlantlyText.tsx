@@ -15,10 +15,7 @@ export const PlantlyText: React.FC<PlantlyTextProps> = ({
   ...props
 }) => {
   return (
-    <Text
-      style={[styles.default, styles[variant], { color: theme[color] }, style]}
-      {...props}
-    >
+    <Text style={[styles[variant], { color: theme[color] }, style]} {...props}>
       {children}
     </Text>
   );
@@ -26,22 +23,42 @@ export const PlantlyText: React.FC<PlantlyTextProps> = ({
 
 const styles = StyleSheet.create({
   default: {
-    fontFamily: Platform.select({
-      ios: "Caveat-Regular",
-      android: "Caveat_400Regular",
-    }),
     fontSize: 16,
     color: theme.colorGreen,
+    ...Platform.select({
+      ios: {
+        fontFamily: "Caveat-Regular",
+        fontWeight: "400",
+      },
+      android: {
+        fontFamily: "Caveat_400Regular",
+      },
+    }),
   },
   heading: {
-    fontFamily: "Caveat_400Regular",
     fontSize: 34,
-    fontWeight: "bold",
     color: theme.colorGreen,
+    ...Platform.select({
+      ios: {
+        fontFamily: "Caveat-Bold",
+        fontWeight: "bold",
+      },
+      android: {
+        fontFamily: "Caveat_700Bold",
+      },
+    }),
   },
   subheading: {
-    fontFamily: "Caveat_400Regular",
     fontSize: 24,
     color: theme.colorGreen,
+    ...Platform.select({
+      ios: {
+        fontFamily: "Caveat-SemiBold",
+        fontWeight: "600",
+      },
+      android: {
+        fontFamily: "Caveat_600SemiBold",
+      },
+    }),
   },
 });

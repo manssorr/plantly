@@ -28,7 +28,11 @@ export default function OnboardingScreen() {
       <StatusBar style="light" />
       <View>
         <Text style={styles.heading}>Plantly</Text>
-        <PlantlyText variant="heading" style={styles.tagline}>
+        <PlantlyText
+          variant="default"
+          color="colorWhite"
+          style={styles.tagline}
+        >
           Keep your plants healthy and hydrated
         </PlantlyText>
       </View>
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   tagline: {
-    color: theme.colorWhite,
+    fontSize: 34,
     textAlign: "center",
   },
 });
