@@ -18,8 +18,8 @@ export const useUserStore = create<UserState>()(
       },
     }),
     {
-      name: "user-storage",
+      name: "planty-user-storage",
       storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+    },
+  ),
 );
