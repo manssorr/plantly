@@ -1,11 +1,18 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { theme } from "@/theme";
 import { PlantType } from "@/store/plantsStore";
 import { PlantlyImage } from "@/components/PlantlyImage";
+import { useRouter } from "expo-router";
 
 export function PlantCard({ plant }: { plant: PlantType }) {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push(`/plants/${plant.id}`);
+  };
+
   return (
-    <View style={styles.plantCard}>
+    <TouchableOpacity onPress={handlePress} style={styles.plantCard}>
       <PlantlyImage imageUri={plant.imageUri} size={100} />
       <View style={styles.details}>
         <Text numberOfLines={1} style={styles.plantName}>
@@ -15,7 +22,7 @@ export function PlantCard({ plant }: { plant: PlantType }) {
           Water every {plant.wateringFrequencyDays} days
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

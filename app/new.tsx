@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Alert,
-  ScrollView,
-  type TextInputProps,
-  TouchableOpacity,
-} from "react-native";
+import { Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { theme } from "@/theme";
 import { useState } from "react";
 import { PlantlyImage } from "@/components/PlantlyImage";
