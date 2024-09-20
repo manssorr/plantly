@@ -6,7 +6,7 @@ import { PlantlyImage } from "@/components/PlantlyImage";
 export function PlantCard({ plant }: { plant: PlantType }) {
   return (
     <View style={styles.plantCard}>
-      <PlantlyImage size={100} />
+      <PlantlyImage imageUri={plant.imageUri} size={100} />
       <View style={styles.details}>
         <Text numberOfLines={1} style={styles.plantName}>
           {plant.name}

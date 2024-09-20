@@ -6,6 +6,7 @@ import {
   Alert,
   ScrollView,
   type TextInputProps,
+  TouchableOpacity,
 } from "react-native";
 import { theme } from "@/theme";
 import { useState } from "react";
@@ -15,6 +16,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { usePlantStore } from "@/store/plantsStore";
 import Input from "@/components/PlantlyInput";
 import { useRouter } from "expo-router";
+import { pickImage, takeImage } from "@/utils/media";
 
 export default function NewScreen() {
   const addPlant = usePlantStore((state) => state.addPlant);
@@ -22,6 +24,7 @@ export default function NewScreen() {
 
   const [name, setName] = useState<string>("");
   const [days, setDays] = useState<string>("");
+  const [imageUri, setImageUri] = useState<string>("");
 
   const handleSubmit = () => {
     if (!name) {
@@ -42,8 +45,22 @@ export default function NewScreen() {
       );
     }
 
-    addPlant(name, Number(days));
+    addPlant({ name, wateringFrequencyDays: Number(days), imageUri });
     router.navigate("/");
+  };
+  const handleChooseImage = async () => {
+    const result = await pickImage({});
+
+    if (result) {
+      setImageUri(result);
+    }
+  };
+
+  const handleTakeImage = async () => {
+    const result = await takeImage({});
+    if (result) {
+      setImageUri(result);
+    }
   };
 
   return (
@@ -52,9 +69,20 @@ export default function NewScreen() {
       contentContainerStyle={styles.contentContainer}
       keyboardShouldPersistTaps="handled"
     >
-      <View style={styles.centered}>
-        <PlantlyImage />
-      </View>
+      <TouchableOpacity
+        style={styles.centered}
+        onPress={handleChooseImage}
+        activeOpacity={0.8}
+      >
+        <PlantlyImage imageUri={imageUri} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.centered}
+        onPress={handleTakeImage}
+        activeOpacity={0.8}
+      >
+        <Text>Take a photo</Text>
+      </TouchableOpacity>
       <Input
         label="Name"
         placeholder="E.g. 1"
@@ -73,14 +101,6 @@ export default function NewScreen() {
   );
 }
 
-interface InputProps extends TextInputProps {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -91,8 +111,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 100,
   },
-
   centered: {
     alignItems: "center",
+    marginBottom: 24,
   },
 });

@@ -1,15 +1,28 @@
 import { useWindowDimensions } from "react-native";
-import { Image } from "expo-image";
+import { Image, ImageStyle } from "expo-image";
 
-export function PlantlyImage({ size }: { size?: number }) {
+type PlantlyImageProps = {
+  size?: number;
+  imageUri?: string;
+  style?: ImageStyle;
+};
+
+export function PlantlyImage({ size, imageUri, style }: PlantlyImageProps) {
   const { width } = useWindowDimensions();
 
   const imageSize = size || Math.min(width / 1.5, 400);
 
   return (
     <Image
-      source={require("@/assets/plantly.png")}
-      style={{ width: imageSize, height: imageSize }}
+      source={imageUri ? { uri: imageUri } : require("@/assets/plantly.png")}
+      style={[
+        {
+          width: imageSize,
+          height: imageSize,
+          borderRadius: 10,
+        },
+        style,
+      ]}
     />
   );
 }
