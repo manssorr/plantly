@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "plantly",
+    "name": "Plantly",
     "slug": "plantly",
     "scheme": "plantly",
     "version": "1.0.0",
@@ -13,22 +13,26 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.manssorr.plantly"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.man_ssorr.plantly"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font",
-      "expo-quick-actions"
-    ]
+    "plugins": ["expo-router", "expo-font", "expo-quick-actions"],
+    "extra": {
+      "eas": {
+        "projectId": "6c9534c1-e454-4583-9b92-dc0eb4b0e3dd"
+      }
+    },
+    "owner": "man_ssorr"
   }
 }

@@ -1,6 +1,20 @@
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
+
+const WAIT_TIME_SECONDS = 2;
 
 export default function RootLayout() {
+  useEffect(() => {
+    const hideSplashScreen = setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, WAIT_TIME_SECONDS * 1000);
+
+    return () => {
+      clearTimeout(hideSplashScreen);
+    };
+  }, []);
   return (
     <Stack>
       <Stack.Screen
